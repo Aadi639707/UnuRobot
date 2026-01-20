@@ -1,6 +1,6 @@
-echo "pyrogram
+pyrogram
 tgcrypto
 motor
 aiohttp
 aiofiles
-python-dotenv" > requirements.txt
+python-dotenv
