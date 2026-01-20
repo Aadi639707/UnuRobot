@@ -1,9 +1,10 @@
 hydrogram
 tortoise-orm
 motor
-pyrogram
-tgcrypto
-motor
+typing_extensions
+pytz
 aiohttp
 aiofiles
 python-dotenv
+tgcrypto
+pyaes
