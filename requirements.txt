@@ -1,0 +1,6 @@
+echo "pyrogram
+tgcrypto
+motor
+aiohttp
+aiofiles
+python-dotenv" > requirements.txt
