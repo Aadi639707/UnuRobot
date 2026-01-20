@@ -1,3 +1,6 @@
+hydrogram
+tortoise-orm
+motor
 pyrogram
 tgcrypto
 motor
