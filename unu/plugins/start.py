@@ -1,10 +1,9 @@
 from hydrogram import Client, filters
 from hydrogram.helpers import ikb
-from hydrogram.types import CallbackQuery, Message
+from hydrogram.types import CallbackQuery, Message, InlineKeyboardButton, InlineKeyboardMarkup
 
 from unu.db import User
 from unu.locales import use_user_lang
-
 
 @Client.on_message(filters.command("start") & filters.private)
 @Client.on_callback_query(filters.regex("^start$"))
@@ -12,10 +11,26 @@ from unu.locales import use_user_lang
 async def start(c: Client, m: Message | CallbackQuery, t):
     func = m.edit_message_text if isinstance(m, CallbackQuery) else m.reply_text
     await User.get_or_create(id=m.from_user.id)
-    print(m.from_user.id)
-    keyb = [[(t("help"), "help"), (t("settings_text"), "settings")]]
+    
+    # Existing Buttons (Help and Settings)
+    keyb = [
+        [(t("help"), "help"), (t("settings_text"), "settings")],
+        # New Buttons: Developer and Updates
+        [
+            ("👨‍💻 Developer", "https://t.me/SANATANI_GOJO", "url"),
+            ("📢 Updates", "https://t.me/Yonko_Crew", "url")
+        ],
+        # New Button: Support Group
+        [
+            ("💬 Support Group", "https://t.me/+bzymw8V_boM0ODJl", "url")
+        ],
+        # New Button: Add to Group
+        [
+            ("➕ Add Me To Your Group", f"https://t.me/{c.me.username}?startgroup=true", "url")
+        ]
+    ]
+    
     await func(t("start_text"), reply_markup=ikb(keyb))
-
 
 @Client.on_callback_query(filters.regex("^help$"))
 @use_user_lang()
@@ -25,7 +40,6 @@ async def help(c: Client, cq: CallbackQuery, t):
         [(t("back"), "start")],
     ]
     await cq.edit_message_text("Ecolha uma opção de ajuda abaixo:", reply_markup=ikb(keyb))
-
 
 @Client.on_callback_query(filters.regex("^help_game$"))
 @use_user_lang()
@@ -38,7 +52,6 @@ async def help_game(c: Client, cq: CallbackQuery, t):
     keyb = [[(t("back"), "help")]]
 
     await cq.edit_message_text(text, reply_markup=ikb(keyb))
-
 
 @Client.on_message(filters.command("status"))
 @Client.on_callback_query(filters.regex("^status$"))
@@ -54,7 +67,6 @@ async def status(c: Client, m: Message | CallbackQuery):
     else:
         await m.answer(text, show_alert=True)
 
-
 @Client.on_callback_query(filters.regex("^ch_status$"))
 async def ch_status(c: Client, cq: CallbackQuery):
     user = await User.get_or_create(id=cq.from_user.id)
@@ -62,3 +74,4 @@ async def ch_status(c: Client, cq: CallbackQuery):
     user.placar = not user.placar
     await user.save()
     await cq.answer("Status alterado com sucesso")
+    
