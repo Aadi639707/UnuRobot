@@ -1,4 +1,5 @@
 import os
+from hydrogram import Client
 
 # --- TELEGRAM API CONFIGURATION ---
 API_ID = 27070308
@@ -12,13 +13,18 @@ DB_URL = "mongodb+srv://sanatanigojo4_db_user:Aadi639707@clonecartbot.a8bu3xa.mo
 SUDO_USERS = [7876183821]
 sudoers = SUDO_USERS
 
-# --- BOT INTERNALS (Fixes the current errors) ---
+# --- BOT INTERNALS ---
 games = {}
 player_game = {}
-timeout = 60 # This fixes the 'timeout' ImportError
-# Adding these just in case they are needed next:
+timeout = 60
 sc = {}
 msgs = {}
 
-# Hydrogram Instance
-bot = None
+# --- INITIALIZING THE BOT CLIENT ---
+# This line fixes the 'NoneType' object has no attribute 'start' error
+bot = Client(
+    "UnuRobot",
+    api_id=API_ID,
+    api_hash=API_HASH,
+    bot_token=BOT_TOKEN
+)
