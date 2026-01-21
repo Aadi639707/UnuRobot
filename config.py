@@ -1,16 +1,15 @@
-from hydrogram import Client
+import os
 
-games = {}
-player_game = {}
+# Telegram API Details
+API_ID = 27070308
+API_HASH = "d1bfc4df9e7a49882cf91fc9f98fc8dd"
+BOT_TOKEN = "8284596809:AAFutYvJvtxGBI0HjRm7uEO9cuTEufMRiCM"
 
-timeout = 120
-minimum_players = 2
+# Database Details
+DB_URL = "mongodb+srv://sanatanigojo4_db_user:Aadi639707@clonecartbot.a8bu3xa.mongodb.net/?retryWrites=true&w=majority&appName=ClonecartBot"
 
-sudoers = [123456789]
+# Admin Details
+SUDO_USERS = [7876183821]
 
-API_ID = ""
-API_HASH = ""
-
-# --- Telegram config ---
-
-bot = Client("bot", api_id=API_ID, api_hash=API_HASH, plugins={"root": "unu.plugins"})
+# Bot Instances (Hydrogram ke liye zaroori ho sakta hai)
+bot = None 
