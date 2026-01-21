@@ -13,11 +13,12 @@ DB_URL = "mongodb+srv://aadi6397070:aadi6397@cluster55.fyd3s92.mongodb.net/?retr
 SUDO_USERS = [7876183821]
 sudoers = SUDO_USERS
 
-# --- GAME SETTINGS (Missing Variables Fix) ---
+# --- GAME SETTINGS (Sabhi errors ka hal) ---
 games = {}
 player_game = {}
 timeout = 60
-minimum_players = 2  # Fixes the latest 'minimum_players' error
+minimum_players = 2 
+maximum_players = 4 # Ye bhi add kar diya hai future error se bachne ke liye
 sc = {}
 msgs = {}
 
