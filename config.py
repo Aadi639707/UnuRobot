@@ -7,7 +7,8 @@ API_HASH = "d1bfc4df9e7a49882cf91fc9f98fc8dd"
 BOT_TOKEN = "8284596809:AAFutYvJvtxGBI0HjRm7uEO9cuTEufMRiCM"
 
 # --- DATABASE CONFIGURATION ---
-DB_URL = "mongodb+srv://sanatanigojo4_db_user:Aadi639707@clonecartbot.a8bu3xa.mongodb.net/?retryWrites=true&w=majority&appName=ClonecartBot"
+# New MongoDB URL with your username and password
+DB_URL = "mongodb+srv://aadi6397070:aadi6397@cluster55.fyd3s92.mongodb.net/?retryWrites=true&w=majority&appName=Cluster55"
 
 # --- USER & PERMISSIONS ---
 SUDO_USERS = [7876183821]
@@ -21,10 +22,10 @@ sc = {}
 msgs = {}
 
 # --- INITIALIZING THE BOT CLIENT ---
-# This line fixes the 'NoneType' object has no attribute 'start' error
 bot = Client(
     "UnuRobot",
     api_id=API_ID,
     api_hash=API_HASH,
-    bot_token=BOT_TOKEN
+    bot_token=BOT_TOKEN,
+    plugins=dict(root="unu/plugins")
 )
