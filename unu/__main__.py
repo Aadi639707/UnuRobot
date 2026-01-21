@@ -29,7 +29,9 @@ async def main():
     await start_server()
     
     print("Logging into Telegram...")
-    me = await bot.start()
+    # FIXED: Getting the bot object properly to avoid AttributeError
+    await bot.start()
+    me = await bot.get_me() 
     print(f"Logged in as: @{me.username}")
     
     print("Loading Plugins...")
