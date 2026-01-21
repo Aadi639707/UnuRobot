@@ -1,21 +1,34 @@
 import os
 import asyncio
 from hydrogram import idle
-from tortoise import run_async
-
 from config import bot
 from unu.db import connect_database
 from unu.utils import load_all, save_all
-from unu.version import ascii_art
 
+# --- DUMMY SERVER FOR RENDER PORT BINDING ---
+from aiohttp import web
+
+async def hello(request):
+    return web.Response(text="Bot is Running!")
+
+async def start_server():
+    app = web.Application()
+    app.router.add_get("/", hello)
+    runner = web.AppRunner(app)
+    await runner.setup()
+    # Render automatically provides a PORT environment variable
+    port = int(os.environ.get("PORT", 8080))
+    site = web.TCPSite(runner, "0.0.0.0", port)
+    await site.start()
+    print(f"Dummy server started on port {port}")
+
+# --- MAIN BOT LOGIC ---
 async def main():
-    # Clear screen and show bot branding
-    if os.name == 'posix':
-        os.system("clear")
-    print(ascii_art)
-    
     print("Connecting to Database...")
     await connect_database()
+    
+    print("Starting Dummy Server for Render...")
+    await start_server()
     
     print("Starting Bot...")
     await bot.start()
@@ -25,7 +38,6 @@ async def main():
     
     print("Bot is now Live!")
     
-    # Using a try-except block to handle Render's signal issues
     try:
         await idle()
     except (KeyboardInterrupt, SystemExit):
@@ -36,7 +48,6 @@ async def main():
         await bot.stop()
 
 if __name__ == "__main__":
-    # Standard way to run async main in Python
     loop = asyncio.get_event_loop()
     loop.run_until_complete(main())
     
